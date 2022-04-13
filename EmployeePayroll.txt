@@ -74,3 +74,57 @@ mysql> select salary from employee_payroll where Start between cast('2021-01-01'
 | 20000000 |
 +----------+
 1 row in set (0.04 sec)
+
+mysql> alter table employee_payroll add gender char(1) after Name;
+Query OK, 0 rows affected (3.82 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_payroll;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| ID     | int         | NO   | PRI | NULL    | auto_increment |
+| Name   | varchar(30) | NO   |     | NULL    |                |
+| gender | char(1)     | YES  |     | NULL    |                |
+| Salary | double      | NO   |     | NULL    |                |
+| Start  | date        | NO   |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+5 rows in set (0.23 sec)
+
+mysql> select * from employee_payroll;
++----+--------+--------+----------+------------+
+| ID | Name   | gender | Salary   | Start      |
++----+--------+--------+----------+------------+
+|  1 | Nikita | NULL   |  5000000 | 2020-08-02 |
+|  2 | amu    | NULL   | 20000000 | 2021-04-12 |
+|  3 | arati  | NULL   | 42500000 | 2020-12-12 |
++----+--------+--------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update employee_payroll set gender = 'M' where id = 1;
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+--------+--------+----------+------------+
+| ID | Name   | gender | Salary   | Start      |
++----+--------+--------+----------+------------+
+|  1 | Nikita | M      |  5000000 | 2020-08-02 |
+|  2 | amu    | NULL   | 20000000 | 2021-04-12 |
+|  3 | arati  | NULL   | 42500000 | 2020-12-12 |
++----+--------+--------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update employee_payroll set gender = 'M' where id = 3;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+--------+--------+----------+------------+
+| ID | Name   | gender | Salary   | Start      |
++----+--------+--------+----------+------------+
+|  1 | Nikita | M      |  5000000 | 2020-08-02 |
+|  2 | amu    | NULL   | 20000000 | 2021-04-12 |
+|  3 | arati  | M      | 42500000 | 2020-12-12 |
++----+--------+--------+----------+------------+
+3 rows in set (0.00 sec)
