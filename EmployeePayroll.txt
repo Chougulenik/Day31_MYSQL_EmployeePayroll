@@ -128,3 +128,51 @@ mysql> select * from employee_payroll;
 |  3 | arati  | M      | 42500000 | 2020-12-12 |
 +----+--------+--------+----------+------------+
 3 rows in set (0.00 sec)
+
+mysql> select sum(Salary) from employee_payroll;
++-------------+
+| sum(Salary) |
++-------------+
+|    67500000 |
++-------------+
+1 row in set (0.22 sec)
+
+mysql> select sum(Salary) as SUM_OF_SALARY from employee_payroll;
++---------------+
+| SUM_OF_SALARY |
++---------------+
+|      67500000 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(Salary) as AVGRAGE_OF_SALARY form employee_payroll;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'form
+employee_payroll' at line 1
+mysql> select avg(Salary) form employee_payroll;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'emplo
+yee_payroll' at line 1
+mysql> select avg(Salary) as AVERAGE_OF_SALARY from employee_payroll;
++-------------------+
+| AVERAGE_OF_SALARY |
++-------------------+
+|          22500000 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select max(Salary) as MAXIMUM_OF_SALARY from employee_payroll;
++-------------------+
+| MAXIMUM_OF_SALARY |
++-------------------+
+|          42500000 |
++-------------------+
+1 row in set (0.12 sec)
+
+mysql> select count(Salary) as COUNT_OF_SALARY from employee_payroll;
++-----------------+
+| COUNT_OF_SALARY |
++-----------------+
+|               3 |
++-----------------+
+1 row in set (0.15 sec)
