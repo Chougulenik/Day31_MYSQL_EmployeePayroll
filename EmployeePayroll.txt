@@ -57,3 +57,20 @@ mysql> select * from employee_payroll;
 |  3 | arati  | 42500000 | 2020-12-12 |
 +----+--------+----------+------------+
 3 rows in set (0.00 sec)
+
+mysql> select salary from employee_payroll where name = 'Nikita';
++---------+
+| salary  |
++---------+
+| 5000000 |
++---------+
+1 row in set (0.02 sec)
+
+mysql> select salary from employee_payroll where Start between cast('2021-01-01'
+ as date) and date (now());
++----------+
+| salary   |
++----------+
+| 20000000 |
++----------+
+1 row in set (0.04 sec)
