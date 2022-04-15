@@ -176,3 +176,64 @@ mysql> select count(Salary) as COUNT_OF_SALARY from employee_payroll;
 |               3 |
 +-----------------+
 1 row in set (0.15 sec)
+
+mysql> alter table employee_payroll add phone_no int (10) after Start;
+Query OK, 0 rows affected, 1 warning (3.32 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from employee_payroll;
++----+--------+--------+----------+------------+----------+
+| ID | Name   | gender | Salary   | Start      | phone_no |
++----+--------+--------+----------+------------+----------+
+|  1 | Nikita | M      |  5000000 | 2020-08-02 |     NULL |
+|  2 | amu    | F      | 20000000 | 2021-04-12 |     NULL |
+|  3 | arati  | M      | 42500000 | 2020-12-12 |     NULL |
++----+--------+--------+----------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> alter table employee_payroll add address varchar(255) after phone_no;
+Query OK, 0 rows affected (0.95 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee_payroll add department varchar(25) after address;
+Query OK, 0 rows affected (0.46 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+--------+--------+----------+------------+----------+---------+-----------
+-+
+| ID | Name   | gender | Salary   | Start      | phone_no | address | department
+ |
++----+--------+--------+----------+------------+----------+---------+-----------
+-+
+|  1 | Nikita | M      |  5000000 | 2020-08-02 |     NULL | NULL    | NULL
+ |
+|  2 | amu    | F      | 20000000 | 2021-04-12 |     NULL | NULL    | NULL
+ |
+|  3 | arati  | M      | 42500000 | 2020-12-12 |     NULL | NULL    | NULL
+ |
++----+--------+--------+----------+------------+----------+---------+-----------
+-+
+3 rows in set (0.06 sec)
+
+mysql> update employee_payroll set department = "cse" where ID = 1;
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set department = "mech" where ID = 2;
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set department = "ETC" where ID = 3;
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+--------+--------+----------+------------+----------+---------+------------+
+| ID | Name   | gender | Salary   | Start      | phone_no | address | department |
++----+--------+--------+----------+------------+----------+---------+------------+
+|  1 | Nikita | M      |  5000000 | 2020-08-02 |     NULL | NULL    | cse        |
+|  2 | amu    | F      | 20000000 | 2021-04-12 |     NULL | NULL    | mech       |
+|  3 | arati  | M      | 42500000 | 2020-12-12 |     NULL | NULL    | ETC        |
++----+--------+--------+----------+------------+----------+---------+------------+
+3 rows in set (0.00 sec)
