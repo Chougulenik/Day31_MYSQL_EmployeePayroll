@@ -291,3 +291,53 @@ mysql> select * from employee_payroll;
 |  3 | arati  | M      | 42500000 | 2020-12-12 |  98568795 | NULL    | ETC        |    100000 |      NULL |        NULL |       NULL |    NULL |
 +----+--------+--------+----------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
 3 rows in set (0.00 sec)
+
+mysql> alter table employee_payroll add Deduction double not null after Basic_pay;
+Query OK, 0 rows affected (0.38 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee_payroll add Taxable_pay double not null after Deduction;
+Query OK, 0 rows affected (0.60 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee_payroll add Income_pay double not null after Taxable_pay;
+Query OK, 0 rows affected (0.57 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee_payroll add Net_pay double not null after Income_pay;
+Query OK, 0 rows affected (0.61 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+--------+--------+----------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
+| ID | Name   | gender | Salary   | Start      | phone_no  | address | department | Basic_pay | Deduction | Taxable_pay | Income_pay | Net_pay |
++----+--------+--------+----------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
+|  1 | Nikita | M      |  5000000 | 2020-08-02 | 987548645 | NULL    | cse        |    500000 |         0 |           0 |          0 |       0 |
+|  2 | amu    | F      | 20000000 | 2021-04-12 | 987845715 | NULL    | mech       |    400000 |         0 |           0 |          0 |       0 |
+|  3 | arati  | M      | 42500000 | 2020-12-12 |  98568795 | NULL    | ETC        |    100000 |         0 |           0 |          0 |       0 |
++----+--------+--------+----------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employee_payroll (Name,gender,Salary,Start,phone_no,address,department,Basic_pay,Deduction,Taxable_pay,Income_pay,Net_pay) values('Nik
+ita','M',5000000,'2020-08-02',98754865,'abc','marketing',500000,20000,10000,3000,210000);
+Query OK, 1 row affected (0.28 sec)
+
+mysql> select * from employee_payroll;
++----+--------+--------+----------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
+| ID | Name   | gender | Salary   | Start      | phone_no  | address | department | Basic_pay | Deduction | Taxable_pay | Income_pay | Net_pay |
++----+--------+--------+----------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
+|  1 | Nikita | M      |  5000000 | 2020-08-02 | 987548645 | NULL    | sales      |    500000 |         0 |           0 |          0 |       0 |
+|  2 | amu    | F      | 20000000 | 2021-04-12 | 987845715 | NULL    | mech       |    400000 |         0 |           0 |          0 |       0 |
+|  3 | arati  | M      | 42500000 | 2020-12-12 |  98568795 | NULL    | ETC        |    100000 |         0 |           0 |          0 |       0 |
+|  4 | Nikita | M      |  5000000 | 2020-08-02 |  98754865 | abc     | marketing  |    500000 |     20000 |       10000 |       3000 |  210000 |
++----+--------+--------+----------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
+4 rows in set (0.17 sec)
+
+mysql> select * from employee_payroll where name = "Nikita";
++----+--------+--------+---------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
+| ID | Name   | gender | Salary  | Start      | phone_no  | address | department | Basic_pay | Deduction | Taxable_pay | Income_pay | Net_pay |
++----+--------+--------+---------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
+|  1 | Nikita | M      | 5000000 | 2020-08-02 | 987548645 | NULL    | sales      |    500000 |         0 |           0 |          0 |       0 |
+|  4 | Nikita | M      | 5000000 | 2020-08-02 |  98754865 | abc     | marketing  |    500000 |     20000 |       10000 |       3000 |  210000 |
++----+--------+--------+---------+------------+-----------+---------+------------+-----------+-----------+-------------+------------+---------+
+2 rows in set (0.06 sec)
